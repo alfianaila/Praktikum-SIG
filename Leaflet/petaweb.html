@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Peta</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+
+    <style>
+        #map { height: 800px; }
+    </style>
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        var map = L.map('map').setView([-6.387842,106.7353949], 13);
+        var marker = L.marker([-6.3529245,106.8300487]).addTo(map);
+        var aoi = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                "type": "Feature",
+                "properties": {
+                    "kampus": "STT Nurul Fikri Kampus A",
+                    "kota": "Depok",
+                    "alamat": "Jalan Setu Indah"
+                },
+                "geometry": {
+                    "coordinates": [
+                    106.84446271474684,
+                    -6.362594892465921
+                    ],
+                    "type": "Point"
+                }
+                },
+                {
+                "type": "Feature",
+                "properties": {
+                    "kampus": "STT Nurul Fikri Kampus B",
+                    "kota": "Jakarta Selatan",
+                    "alamat": "Jalan Lenteng Agung Raya No.20"
+                },
+                "geometry": {
+                    "coordinates": [
+                    106.83267535902831,
+                    -6.352862958034137
+                    ],
+                    "type": "Point"
+                }
+                },
+                {
+                "type": "Feature",
+                "properties": {
+                    "kampus": "Universitas Indonesia",
+                    "kota": "Depok",
+                    "alamat": "Jalan Lingkar, Pondok Cina"
+                },
+                "geometry": {
+                    "coordinates": [
+                    106.82737790299944,
+                    -6.361304944992241
+                    ],
+                    "type": "Point"
+                }
+                },
+                {
+                "type": "Feature",
+                "properties": {
+                    "kampus": "Politeknik Negeri Media Kreatif",
+                    "kota": "Jakarta Selatan",
+                    "alamat": "Jalan Srengseng Sawah Raya"
+                },
+                "geometry": {
+                    "coordinates": [
+                    106.82731457776782,
+                    -6.346892186721462
+                    ],
+                    "type": "Point"
+                }
+                },
+                {
+                "type": "Feature",
+                "properties": {
+                    "kampus": "Universitas Pancasila",
+                    "kota": "Jakarta Selatan",
+                    "alamat": "Jalan Lenteng Agung Raya No.56"
+                },
+                "geometry": {
+                    "coordinates": [
+                    106.8331158374948,
+                    -6.339253942999505
+                    ],
+                    "type": "Point"
+                }
+                },
+                {
+                "type": "Feature",
+                "properties": {
+                    "kampus": "Universitas Gunadarma Kampus G",
+                    "kota": "Depok",
+                    "alamat": "Jalan Akses UI, Kelapa Dua"
+                },
+                "geometry": {
+                    "coordinates": [
+                    106.84367506510694,
+                    -6.354322411515824
+                    ],
+                    "type": "Point"
+                }
+                }
+            ]
+            };
+
+            L.geoJSON(aoi, {   
+                pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng);}
+            }),
+
+            L.geoJSON(aoi, { onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.kampus + '<br>' + feature.properties.kota + '<br>' + feature.properties.alamat);
+            }}
+             ).addTo(map);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    </script>
+</body>
+</html>
